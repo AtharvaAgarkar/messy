@@ -1,0 +1,266 @@
+definitions:
+
+  user_email_register:
+    required:
+      - email
+      - name
+      - mobileNumber
+    properties:
+      email:
+        type: string
+      name:
+        type: string
+      mobileNumber:
+        type: string
+    example:
+      email: "rohit@mailinator.com"
+      name: "Rohit Pandit"
+      mobileNumber: "7038415053"
+  
+  user_generate_otp_def:
+    required:
+      - email
+    properties:
+      email:
+        type: string
+    example:
+      email: "rohit@mailinator.com"
+
+  user_verify_otp_def:
+    required:
+      - email
+      - otp
+    properties:
+      email:
+        type: string
+      otp:
+        type: number
+    example:
+      email: "rohit@mailinator.com"
+      otp: 5053
+
+  update_user_def:
+    required:
+      - profilePic
+      - mobileNumber
+      - email  
+      - name
+    properties:
+      profilePic:
+        type: string
+        example: ""
+      email:
+        type: string
+        example: "rohit@mailinator.com"
+      name:
+        type: string
+        example: "Rohit Pandit"
+      mobileNumber:
+        type: string
+        example: "7038415053"
+
+  admin_login_email:
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    example:
+      email: "ad.messy@mailinator.com"
+      password: "Admin@2024"
+
+  mess_details:
+    properties:
+      name:
+        type: string
+      address:
+        type: string
+      email:
+        type: string
+      password:
+        type: string
+      location:
+        type: object
+        properties:
+          type:
+            type: string
+            enum: ['Point']
+          coordinates:
+            type: array
+            items:
+              type: number
+    example:
+      name: "Pune Mess"
+      email: "punemess@mailinator.com"
+      password: "Punem@2024"
+      address: "123 Food Street, Pune, Maharashtra, India"
+      location:
+        type: "Point"
+        coordinates:
+          - 73.8567  # Longitude
+          - 18.5204  # Latitude
+    
+  mess_login_email:
+    required:
+      - email
+      - password
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+    example:
+      email: "punemess@mailinator.com"
+      password: "Punem@2024"
+  
+  mess_reset_password:
+    required:
+      - newPassword
+      - confirmPassword
+    properties:
+      newPassword:
+        type: string
+      confirmPassword:
+        type: string
+    example:
+      newPassword: "Rohit@123"
+      confirmPassword: "Rohit@123"
+
+  mess_change_password:
+    required:
+      - oldPassword
+      - newPassword
+      - confirmPassword
+    properties:
+      oldPassword:
+        type: string
+      newPassword:
+        type: string
+      confirmPassword:
+        type: string
+    example:
+      oldPassword: "Rohit@11111"
+      newPassword: "Rohit@123"
+      confirmPassword: "Rohit@123"
+
+
+  mess_menu_details:
+    properties:
+      name:
+        type: string
+      address:
+        type: string
+      location:
+        type: object
+        properties:
+          type:
+            type: string
+            enum: ['Point']
+          coordinates:
+            type: array
+            items:
+              type: number
+      dailyMenus: # Added field for daily menus
+        type: array
+        items:
+          type: object
+          properties:
+            day:
+              type: string
+            meals:
+              type: array
+              items:
+                type: object
+                properties:
+                  meal:
+                    type: string
+                  items:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        name:
+                          type: string
+                        description:
+                          type: string
+                        price:
+                          type: number
+    example:
+      name: "Pune Mess"
+      address: "123 Food Street, Pune, Maharashtra, India"
+      location:
+        type: "Point"
+        coordinates:
+          - 73.8567  # Longitude
+          - 18.5204  # Latitude
+      dailyMenus:
+        - day: "Monday"
+          meals:
+            - meal: "Lunch"
+              items:
+                - name: "Veg Biryani"
+                  description: "Aromatic rice dish with vegetables"
+                  price: 150
+                - name: "Paneer Butter Masala"
+                  description: "Creamy paneer curry"
+                  price: 120
+        - day: "Tuesday"
+          meals:
+            - meal: "Dinner"
+              items:
+                - name: "Dal Tadka"
+                  description: "Lentils tempered with spices"
+                  price: 100
+
+  pg_details:
+    properties:
+      name:
+        type: string
+        description: "Name of the PG"
+      address:
+        type: string
+        description: "Complete address of the PG"
+      contactNumber:
+        type: string
+        description: "Contact number of the PG owner or manager"
+      facilities:
+        type: array
+        description: "List of facilities available at the PG"
+        items:
+          type: string
+      pricePerMonth:
+        type: number
+        description: "Monthly rent of the PG"
+      availableRooms:
+        type: number
+        description: "Number of available rooms"
+      location:
+        type: object
+        properties:
+          type:
+            type: string
+            enum: ['Point']
+          coordinates:
+            type: array
+            items:
+              type: number
+              description: "Longitude and latitude coordinates"
+    example:
+      name: "Sunshine PG"
+      address: "456 Riverfront Road, Bengaluru, Karnataka, India"
+      contactNumber: "+91 9876543210"
+      facilities:
+        - "Wi-Fi"
+        - "Laundry"
+        - "24/7 Water Supply"
+        - "Food Included"
+      pricePerMonth: 10000
+      availableRooms: 5
+      location:
+        type: "Point"
+        coordinates:
+          - 77.5946  # Longitude
+          - 12.9716  # Latitude
